@@ -1,0 +1,17 @@
+# Ignore Python cache files and directories
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environments
+venv/
+analytics-venv/
+
+# Ignore log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+#ignore .ipynb file
+help.ipynb
