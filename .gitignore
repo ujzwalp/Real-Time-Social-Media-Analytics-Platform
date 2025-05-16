@@ -15,3 +15,5 @@ Thumbs.db
 
 #ignore .ipynb file
 help.ipynb
+
+.vscode

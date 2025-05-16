@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
-from random import choice
 from confluent_kafka import Producer
 from faker import Faker
 import json, time
 
-if __name__ == '__main__':
+def producer():
     
     config = {
         "bootstrap.servers" : 'localhost:9092',
@@ -26,7 +25,7 @@ if __name__ == '__main__':
     topic = 'social_meida_feed'
     
     try:
-        while True:
+        for i in range(10):
             message_dict = {
             "id": fake.uuid4(),
             "username": fake.user_name(),
@@ -49,4 +48,3 @@ if __name__ == '__main__':
         print("Stopping producer... Flushing pending messages.")
     finally:       
         producer.flush()
-    
