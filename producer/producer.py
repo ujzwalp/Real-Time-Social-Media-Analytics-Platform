@@ -25,7 +25,7 @@ def producer():
     topic = 'social_meida_feed'
     
     try:
-        for i in range(10):
+        for i in range(50):
             message_dict = {
             "id": fake.uuid4(),
             "username": fake.user_name(),

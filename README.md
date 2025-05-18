@@ -18,4 +18,4 @@ This is for my reference.
 
 7. Start the Kafka Server: bin/kafka-server-start.sh config/server.properties
 
-8. Run main script : spark-submit --master local[*] --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5 --conf spark.pyspark.python=D:/"Real-Time Social Media Analytics Platform"/analytics-venv/Scripts/python.exe main.py
+8. Run main script : spark-submit --master local[*] --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5 main.py

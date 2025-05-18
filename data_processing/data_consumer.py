@@ -35,10 +35,11 @@ class Read_Social_Media_Feed(Message_Reader):
                 .option("kafka.bootstrap.servers", self.host) \
                 .option("subscribe", self.topic) \
                 .option("includeHeaders", "true") \
+                .option("startingOffsets", "earliest")\
                 .load()
         df_stream.printSchema()
         df_query = df_stream.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)", "headers")
-        query = df_query.writeStream.outputMode("append").format("console").start()
+        query = df_query.writeStream.outputMode("append").format("console").option("truncate", False).start()
         time.sleep(10)
         query.stop()
         
