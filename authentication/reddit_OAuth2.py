@@ -85,7 +85,7 @@ class OAuthRedditAccess(Authentication):
         
         
 def OAth2Func():
-    user_agent = 1
+    user_agent = "script:producer_reddit_api:v1.0 (by /u/ujzwalp1710)"
     redirect_url = "http://localhost:8080"
     client_id = os.getenv("client_id")
     client_secret = os.getenv("client_secret")
