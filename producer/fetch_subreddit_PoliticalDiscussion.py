@@ -2,7 +2,7 @@ import praw, os, json, pprint
 from dotenv import load_dotenv
 load_dotenv()
 
-class Subreddit_India:
+class Subreddit_PoliticalDiscussion:
     def __init__(self):
         self._user_agent = "script:producer_reddit_api:v1.0 (by /u/ujzwalp1710)"
         self._client_id = os.getenv("client_id")
@@ -15,7 +15,7 @@ class Subreddit_India:
         raise ValueError("Not a valid request for hot submissions! Implemented in subclass")
     
         
-class Get_India_Feed(Subreddit_India):
+class Get_PoliticalDiscussion_Feed(Subreddit_PoliticalDiscussion):
     def __init__(self):
         self._user_agent = "script:producer_reddit_api:v1.0 (by /u/ujzwalp1710)"
         self._client_id = os.getenv("client_id")
@@ -32,7 +32,7 @@ class Get_India_Feed(Subreddit_India):
         
         
     def get_hot_submissions(self):
-        subreddit = self.reddit.subreddit("India")
+        subreddit = self.reddit.subreddit("PoliticalDiscussion")
         submissions = subreddit.hot(limit=500)
         hot_submission_list = []
         
@@ -80,7 +80,7 @@ class Get_India_Feed(Subreddit_India):
         return hot_submission_list
     
     def get_top_submissions(self):
-        subreddit = self.reddit.subreddit("India")
+        subreddit = self.reddit.subreddit("PoliticalDiscussion")
         submissions = subreddit.top(time_filter="all", limit=500)
         top_submission_list = []
         

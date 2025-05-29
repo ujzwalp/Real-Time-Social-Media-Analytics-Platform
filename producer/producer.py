@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 from confluent_kafka import Producer
-from faker import Faker
+from producer.fetch_subreddit_india import Get_India_Feed
+from producer.fetch_subreddit_PoliticalDiscussion import Get_PoliticalDiscussion_Feed
 import json, time
 
 def producer():
@@ -12,7 +13,6 @@ def producer():
     }
     
     producer = Producer(config)
-    fake = Faker()
     
     def delivery_callback(err, mssg):
         
@@ -24,24 +24,55 @@ def producer():
         
     topic = 'social_meida_feed'
     
+    r_india_messages_hot = Get_India_Feed().get_hot_submissions()
+    r_india_messages_top = Get_India_Feed().get_top_submissions()
+    
+    r_political_discussion_messages_hot = Get_PoliticalDiscussion_Feed().get_hot_submissions()
+    r_political_discussion_messages_top = Get_PoliticalDiscussion_Feed().get_top_submissions()
+    
     try:
-        for i in range(50):
-            message_dict = {
-            "id": fake.uuid4(),
-            "username": fake.user_name(),
-            "timestamp": fake.iso8601(),
-            "content": fake.text(max_nb_chars=140),
-            "likes": fake.random_int(min=0, max=1000),
-            "shares": fake.random_int(min=0, max=500),
-            }
+        for message in r_india_messages_hot:
             
-            message = json.dumps(message_dict)
+            message_key = json.loads(message)["subreddit_id"]
             
-            producer.produce(topic, key=str(message_dict["id"]), value=message, callback=delivery_callback)
+            producer.produce(topic, key=str(message_key), value=message, callback=delivery_callback)
             
             producer.poll(0)
             
-            print(f"Produced message: {message}")
+            print(f"Produced message for hot submission in r\india: {message}")
+            time.sleep(1)
+            
+        for message in r_india_messages_top:
+            
+            message_key = json.loads(message)["subreddit_id"]
+            
+            producer.produce(topic, key=str(message_key), value=message, callback=delivery_callback)
+            
+            producer.poll(0)
+            
+            print(f"Produced message for top submission in r\india: {message}")
+            time.sleep(1)
+            
+        for message in r_political_discussion_messages_hot:
+            
+            message_key = json.loads(message)["subreddit_id"]
+            
+            producer.produce(topic, key=str(message_key), value=message, callback=delivery_callback)
+            
+            producer.poll(0)
+            
+            print(f"Produced message for hot submission in r\PoliticalDiscussion: {message}")
+            time.sleep(1)
+            
+        for message in r_political_discussion_messages_top:
+            
+            message_key = json.loads(message)["subreddit_id"]
+            
+            producer.produce(topic, key=str(message_key), value=message, callback=delivery_callback)
+            
+            producer.poll(0)
+            
+            print(f"Produced message for top submission in r\PoliticalDiscussion: {message}")
             time.sleep(1)
             
     except KeyboardInterrupt:
