@@ -33,7 +33,7 @@ class Get_PoliticalDiscussion_Feed(Subreddit_PoliticalDiscussion):
         
     def get_hot_submissions(self):
         subreddit = self.reddit.subreddit("PoliticalDiscussion")
-        submissions = subreddit.hot(limit=500)
+        submissions = subreddit.hot(limit=10)
         hot_submission_list = []
         
         
@@ -81,7 +81,7 @@ class Get_PoliticalDiscussion_Feed(Subreddit_PoliticalDiscussion):
     
     def get_top_submissions(self):
         subreddit = self.reddit.subreddit("PoliticalDiscussion")
-        submissions = subreddit.top(time_filter="all", limit=500)
+        submissions = subreddit.top(time_filter="all", limit=10)
         top_submission_list = []
         
         

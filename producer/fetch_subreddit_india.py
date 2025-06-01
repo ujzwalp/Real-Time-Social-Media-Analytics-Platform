@@ -33,7 +33,7 @@ class Get_India_Feed(Subreddit_India):
         
     def get_hot_submissions(self):
         subreddit = self.reddit.subreddit("India")
-        submissions = subreddit.hot(limit=500)
+        submissions = subreddit.hot(limit=10)
         hot_submission_list = []
         
         
@@ -81,7 +81,7 @@ class Get_India_Feed(Subreddit_India):
     
     def get_top_submissions(self):
         subreddit = self.reddit.subreddit("India")
-        submissions = subreddit.top(time_filter="all", limit=500)
+        submissions = subreddit.top(time_filter="all", limit=10)
         top_submission_list = []
         
         

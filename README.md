@@ -18,4 +18,8 @@ This is for my reference.
 
 7. Start the Kafka Server: bin/kafka-server-start.sh config/server.properties
 
+8. In another terminal, cd to D:\kafka_2.13-4.0.0
+
+9. Create topic using command: bin/kafka-topics.sh --create --topic social_meida_feed --partitions 4 --bootstrap-server localhost:9092
+
 8. Run main script : spark-submit --master local[*] --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5 main.py
