@@ -17,9 +17,7 @@ class Subreddit_India:
         
 class Get_India_Feed(Subreddit_India):
     def __init__(self):
-        self._user_agent = "script:producer_reddit_api:v1.0 (by /u/ujzwalp1710)"
-        self._client_id = os.getenv("client_id")
-        self._client_secret = os.getenv("client_secret")
+        super.__init__()
         
         self.reddit = praw.Reddit(
             client_id = self._client_id,
@@ -30,10 +28,11 @@ class Get_India_Feed(Subreddit_India):
         
         print("Script granted access to the api with the following privilege: ",   self.reddit.auth.scopes())  
         
+        self.subreddit = self.reddit.subreddit("India")
+        
         
     def get_hot_submissions(self):
-        subreddit = self.reddit.subreddit("India")
-        submissions = subreddit.hot(limit=10)
+        submissions = self.subreddit.hot(limit=1000)
         hot_submission_list = []
         
         
@@ -80,8 +79,7 @@ class Get_India_Feed(Subreddit_India):
         return hot_submission_list
     
     def get_top_submissions(self):
-        subreddit = self.reddit.subreddit("India")
-        submissions = subreddit.top(time_filter="all", limit=10)
+        submissions = self.subreddit.top(time_filter="all", limit=1000)
         top_submission_list = []
         
         

@@ -42,7 +42,7 @@ class Read_Social_Media_Feed(Message_Reader):
         df_stream.printSchema()
         df_query = df_stream.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)", "headers")
         
-        submission_struct_schema = reddit_schema = StructType([
+        submission_struct_schema = StructType([
                         StructField("title", StringType(), nullable=True),
                         StructField("id", StringType(), nullable=False),
                         StructField("content", StringType(), nullable=True),
@@ -121,11 +121,13 @@ class Read_Social_Media_Feed(Message_Reader):
                                             "value.subreddit_subscribers"
         )
 
-        query = df_submission_flattened.writeStream.outputMode("append").format("console").option("truncate", False).start()
-        time.sleep(10)
-        query.awaitTermination()
+        # query = df_submission_flattened.writeStream.outputMode("append").format("console").option("truncate", False).start()
+        # # time.sleep(10)
+        # query.awaitTermination()
+        
+        return df_submission_flattened
         
         
 def data_consumer():
     obj_social_media_feed = Read_Social_Media_Feed("localhost:9092", "social_meida_feed")
-    obj_social_media_feed.read_data()
+    return obj_social_media_feed.read_data()
