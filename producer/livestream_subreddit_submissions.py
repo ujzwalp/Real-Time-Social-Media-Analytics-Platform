@@ -25,12 +25,12 @@ class LiveStream_Submissions(LiveStream):
         
         print("Script granted access to the api with the following privilege: ",self.reddit.auth.scopes())  
         
-        self.subreddit = self.reddit.subreddit("India+PoliticalDiscussion")
+        self.subreddit = self.reddit.subreddit("test")
         
         print("########## Ready to Simulate Livestreaming of the new reddit submissions ##########")
         
     def livestream_new_submissions(self):
-        for submission in self.subreddit.stream.submissions(pause_after=0):
+        for submission in self.subreddit.stream.submissions(pause_after=0,skip_existing=True):
             if submission is None:
                 continue
             

@@ -84,6 +84,8 @@ class Producer_Client_Application(Producer_Client):
                 
         except KeyboardInterrupt:
             print("Stopping producer")
+        finally:
+            self.producer.flush()
             
 
     def livestream_producer(self, message):
@@ -91,6 +93,9 @@ class Producer_Client_Application(Producer_Client):
             message_key = json.loads(message)["subreddit_id"]
             
             self.producer.produce(self.topic, key=str(message_key), value=message, callback=self.delivery_callback)
-            time.sleep(1)
+            self.producer.poll(0)
+            # time.sleep(1)
         except KeyboardInterrupt:
             print("Stopping producer")
+        finally:
+            self.producer.flush()

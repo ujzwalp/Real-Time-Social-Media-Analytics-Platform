@@ -10,7 +10,7 @@ This is for my reference.
 
 3. Created a requirements text file with `pip freeze > requirements.txt`. If we want to recreate this environment on another system, we can do so by running `pip install -r requirements.txt`.
 
-4. In WSL, cd /mnt/d/kafka_2.13-4.0.0
+4. In WSL, cd /mnt/d/kafka_2.13-4.0.0 and run:  rm -rf /tmp/kafka-logs /tmp/kraft-combined-logs
 
 5. Generate kafka cluster UUID: KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
 
@@ -22,6 +22,6 @@ This is for my reference.
 
 9. Create topic using command: bin/kafka-topics.sh --create --topic social_meida_feed --partitions 4 --bootstrap-server localhost:9092
 
-10 cd /mnt/d/'Real-Time Social Media Analytics Platform'
+10. cd /mnt/d/'Real-Time Social Media Analytics Platform'
 
-8. Run main script : spark-submit --master local[*] --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5 main.py
+11. Run main script : spark-submit --master local[*] --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5 main.py

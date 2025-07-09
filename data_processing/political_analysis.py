@@ -27,12 +27,14 @@ class Reddit_Politics(Politics):
         """
             filtering out just political tags submissions
         """
-        self.df_politico = df_orginial.filter(col('tags')=='Politics')
+        # self.df_politico = df_orginial.filter(col('tags')=='Politics')
+        self.df_politico = df_orginial
 
     
     
     def most_upvoted_political_submissions(self):
-        self.df_most_voted_post_in_politics = self.df_politico.filter(col('ups') > 100);
+        # self.df_most_voted_post_in_politics = self.df_politico.filter(col('ups') > 100);
+        self.df_most_voted_post_in_politics = self.df_politico
         
         self.query = self.df_most_voted_post_in_politics.writeStream.outputMode('append').format('console').option("truncate", False).start()
         

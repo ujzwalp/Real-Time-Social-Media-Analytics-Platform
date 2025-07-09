@@ -1,4 +1,4 @@
-import praw, os, json, pprint
+import praw, os, json
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,7 +17,7 @@ class Subreddit_India:
         
 class Get_India_Feed(Subreddit_India):
     def __init__(self):
-        super.__init__()
+        super().__init__()
         
         self.reddit = praw.Reddit(
             client_id = self._client_id,
@@ -32,7 +32,7 @@ class Get_India_Feed(Subreddit_India):
         
         
     def get_hot_submissions(self):
-        submissions = self.subreddit.hot(limit=1000)
+        submissions = self.subreddit.hot(limit=10)
         hot_submission_list = []
         
         
@@ -79,7 +79,7 @@ class Get_India_Feed(Subreddit_India):
         return hot_submission_list
     
     def get_top_submissions(self):
-        submissions = self.subreddit.top(time_filter="all", limit=1000)
+        submissions = self.subreddit.top(time_filter="all", limit=10)
         top_submission_list = []
         
         
