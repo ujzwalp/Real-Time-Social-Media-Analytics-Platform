@@ -1,0 +1,52 @@
+
+¨
+
+proto_reddit_post.protoreddit.post.v1"ô	
+
+Submission
+title (	Rtitle
+id (	Rid
+content (	Rcontent
+score (Rscore
+likes (Rlikes
+ups (Rups
+downs (Rdowns!
+upvote_ratio (RupvoteRatio%
+total_comments	 (RtotalComments
+edited
+ (Redited
+is_video (RisVideo.
+is_original_content (RisOriginalContent
+	self_post (RselfPost;
+media (2%.reddit.post.v1.Submission.MediaEntryRmediaK
+media_embed (2*.reddit.post.v1.Submission.MediaEmbedEntryR
+mediaEmbed
+
+media_only (R	mediaOnly
+tags (	Rtags
+category (	Rcategory)
+content_category (	RcontentCategory'
+discussion_type (	RdiscussionType
+over_18 (Rover18
+domain (	Rdomain!
+total_awards (RtotalAwards8
+awards (2 .reddit.post.v1.Submission.AwardRawards
+author (	Rauthor
+	author_id (	RauthorId
+	post_date (RpostDate
+post_url (	RpostUrl%
+post_permalink (	RpostPermalink%
+subreddit_name (	RsubredditName!
+subreddit_id (	RsubredditId3
+subreddit_subscribers  (RsubredditSubscribers8
+
+MediaEntry
+key (	Rkey
+value (	Rvalue:8=
+MediaEmbedEntry
+key (	Rkey
+value (	Rvalue:8A
+Award
+id (	Rid
+name (	Rname
+count (Rcountbproto3

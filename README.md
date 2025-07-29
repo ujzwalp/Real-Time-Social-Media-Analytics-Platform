@@ -24,4 +24,6 @@ This is for my reference.
 
 10. cd /mnt/d/'Real-Time Social Media Analytics Platform'
 
-11. Run main script : spark-submit --master local[*] --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5 main.py
+note: run this command to generate descriptor file for protobuf: protoc --descriptor_set_out=./protobuf/submission_schema.desc --include_imports --proto_path=./protobuf/ ./protobuf/proto_reddit_post.proto
+
+11. Run main script : spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5,org.apache.spark:spark-protobuf_2.12:3.5.5 main.py

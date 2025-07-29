@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package reddit.post.v1;
+
+message Submission {
+  string title = 1;
+  string id = 2;  // Required field
+  string content = 3;
+  int32 score = 4;
+  int32 likes = 5;
+  int32 ups = 6;
+  int32 downs = 7;
+  float upvote_ratio = 8;
+  int32 total_comments = 9;
+  bool edited = 10;
+  bool is_video = 11;
+  bool is_original_content = 12;
+  bool self_post = 13;
+  map<string, string> media = 14;
+  map<string, string> media_embed = 15;
+  bool media_only = 16;
+  string tags = 17;
+  string category = 18;
+  repeated string content_category = 19;
+  string discussion_type = 20;
+  bool over_18 = 21;
+  string domain = 22;
+  int32 total_awards = 23;
+
+  message Award {
+    string id = 1;
+    string name = 2;
+    int32 count = 3;
+  }
+  repeated Award awards = 24;
+
+  string author = 25;
+  string author_id = 26;
+  int64 post_date = 27;  // UTC timestamp as int64
+  string post_url = 28;
+  string post_permalink = 29;
+  string subreddit_name = 30;
+  string subreddit_id = 31;
+  int32 subreddit_subscribers = 32;
+}
