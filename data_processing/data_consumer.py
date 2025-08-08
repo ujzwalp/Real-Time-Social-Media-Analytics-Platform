@@ -1,9 +1,10 @@
-from pyspark.sql import SparkSession
+# from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
+from spark_session import spark_session
 import time
 
-spark = SparkSession.builder.appName("Social_Media_Feed_Analysis_App").config("spark.master", "local[*]") .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5").getOrCreate()
+spark = spark_session()
 
 class Message_Reader:
     """
@@ -121,48 +122,51 @@ class Read_Social_Media_Feed(Message_Reader):
                                             "value.subreddit_subscribers"
         )
 
-        df_protbuf_map = df_query.select(from_json("value", submission_struct_schema).alias("value")).withColumn("value", struct(
-                                                                                                                        col("value.title").alias("title"),
-                                                                                                                        col("value.id").alias("id"),
-                                                                                                                        col("value.content").alias("content"),
-                                                                                                                        col("value.score").alias("score"),
-                                                                                                                        col("value.likes").alias("likes"),
-                                                                                                                        col("value.ups").alias("ups"),
-                                                                                                                        col("value.downs").alias("downs"),
-                                                                                                                        col("value.upvote_ratio").alias("upvote_ratio"),
-                                                                                                                        col("value.total_comments").alias("total_comments"),
-                                                                                                                        col("value.edited").alias("edited"),
-                                                                                                                        col("value.is_video").alias("is_video"),
-                                                                                                                        col("value.is_original_content").alias("is_original_content"),
-                                                                                                                        col("value.self_post").alias("self_post"),
-                                                                                                                        col("value.media").alias("media"),
-                                                                                                                        col("value.media_embed").alias("media_embed"),
-                                                                                                                        col("value.media_only").alias("media_only"),
-                                                                                                                        col("value.tags").alias("tags"),
-                                                                                                                        col("value.category").alias("category"),
-                                                                                                                        col("value.content_category").alias("content_category"),
-                                                                                                                        col("value.discussion_type").alias("discussion_type"),
-                                                                                                                        col("value.over_18").alias("over_18"),
-                                                                                                                        col("value.domain").alias("domain"),
-                                                                                                                        col("value.total_awards").alias("total_awards"),
-                                                                                                                        col("value.awards").alias("awards"),
-                                                                                                                        col("value.author").alias("author"),
-                                                                                                                        col("value.author_id").alias("author_id"),
-                                                                                                                        col("value.post_date").cast("long").alias("post_date"),
-                                                                                                                        col("value.post_url").alias("post_url"),
-                                                                                                                        col("value.post_permalink").alias("post_permalink"),
-                                                                                                                        col("value.subreddit_name").alias("subreddit_name"),
-                                                                                                                        col("value.subreddit_id").alias("subreddit_id"),
-                                                                                                                        col("value.subreddit_subscribers").alias("subreddit_subscribers")
-                                                                                                                    ))
+        
+        # uncomment df_protbuf_map when using manual way of serializing through protobuf and then manually writing into BQ( without spark-bq-connector )
+        # df_protbuf_map = df_query.select(from_json("value", submission_struct_schema).alias("value")).withColumn("value", struct(
+        #                                                                                                                 col("value.title").alias("title"),
+        #                                                                                                                 col("value.id").alias("id"),
+        #                                                                                                                 col("value.content").alias("content"),
+        #                                                                                                                 col("value.score").alias("score"),
+        #                                                                                                                 col("value.likes").alias("likes"),
+        #                                                                                                                 col("value.ups").alias("ups"),
+        #                                                                                                                 col("value.downs").alias("downs"),
+        #                                                                                                                 col("value.upvote_ratio").alias("upvote_ratio"),
+        #                                                                                                                 col("value.total_comments").alias("total_comments"),
+        #                                                                                                                 col("value.edited").alias("edited"),
+        #                                                                                                                 col("value.is_video").alias("is_video"),
+        #                                                                                                                 col("value.is_original_content").alias("is_original_content"),
+        #                                                                                                                 col("value.self_post").alias("self_post"),
+        #                                                                                                                 col("value.media").alias("media"),
+        #                                                                                                                 col("value.media_embed").alias("media_embed"),
+        #                                                                                                                 col("value.media_only").alias("media_only"),
+        #                                                                                                                 col("value.tags").alias("tags"),
+        #                                                                                                                 col("value.category").alias("category"),
+        #                                                                                                                 col("value.content_category").alias("content_category"),
+        #                                                                                                                 col("value.discussion_type").alias("discussion_type"),
+        #                                                                                                                 col("value.over_18").alias("over_18"),
+        #                                                                                                                 col("value.domain").alias("domain"),
+        #                                                                                                                 col("value.total_awards").alias("total_awards"),
+        #                                                                                                                 col("value.awards").alias("awards"),
+        #                                                                                                                 col("value.author").alias("author"),
+        #                                                                                                                 col("value.author_id").alias("author_id"),
+        #                                                                                                                 col("value.post_date").cast("long").alias("post_date"),
+        #                                                                                                                 col("value.post_url").alias("post_url"),
+        #                                                                                                                 col("value.post_permalink").alias("post_permalink"),
+        #                                                                                                                 col("value.subreddit_name").alias("subreddit_name"),
+        #                                                                                                                 col("value.subreddit_id").alias("subreddit_id"),
+        #                                                                                                                 col("value.subreddit_subscribers").alias("subreddit_subscribers")
+        #                                                                                                             ))
 
-
+        # uncomment below 3 line of code when debuggin is required till spark. comment all stream writing code in main file
         # query = df_submission_flattened.writeStream.outputMode("append").format("console").option("truncate", False).start()
         # # time.sleep(10)
         # query.awaitTermination()
-        
-        # return df_submission_flattened
-        return df_protbuf_map
+                
+        return df_submission_flattened
+    
+        # return df_protbuf_map
         
         
 def data_consumer():
