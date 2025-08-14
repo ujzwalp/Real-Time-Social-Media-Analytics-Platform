@@ -1,6 +1,5 @@
-# from pyspark.sql import SparkSession
-from pyspark.sql.types import *
-from pyspark.sql.functions import *
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType, DoubleType, BooleanType, MapType, ArrayType
+from pyspark.sql.functions import from_json
 from spark_session import spark_session
 import time
 
@@ -42,7 +41,6 @@ class Read_Social_Media_Feed(Message_Reader):
                 .load()
         df_stream.printSchema()
         df_query = df_stream.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)", "headers")
-        
         submission_struct_schema = StructType([
                         StructField("title", StringType(), nullable=True),
                         StructField("id", StringType(), nullable=False),
@@ -77,7 +75,7 @@ class Read_Social_Media_Feed(Message_Reader):
                         ), nullable=True),
                         StructField("author", StringType(), nullable=True),
                         StructField("author_id", StringType(), nullable=True),
-                        StructField("post_date", TimestampType(), nullable=True),  # UTC timestamp
+                        StructField("post_date", DoubleType(), nullable=True),  # UTC timestamp
                         StructField("post_url", StringType(), nullable=True),
                         StructField("post_permalink", StringType(), nullable=True),
                         StructField("subreddit_name", StringType(), nullable=True),

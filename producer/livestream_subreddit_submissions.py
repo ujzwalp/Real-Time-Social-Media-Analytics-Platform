@@ -63,7 +63,7 @@ class LiveStream_Submissions(LiveStream):
                 "author_id": getattr(submission.author, "id", "t2_NA"),
                 "post_date": submission.created_utc,
                 "post_url": submission.url,
-                "post_premalink": submission.permalink,
+                "post_permalink": submission.permalink,
                 "subreddit_name": submission.subreddit_name_prefixed,
                 "subreddit_id": submission.subreddit_id,
                 "subreddit_subscribers": submission.subreddit_subscribers,

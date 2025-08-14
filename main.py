@@ -1,7 +1,8 @@
 from producer.producer import Producer_Client_Application
 from producer.livestream_subreddit_submissions import LiveStream_Submissions
 from data_processing.data_consumer import data_consumer
-from data_processing.political_analysis import Reddit_Politics
+# from data_processing.political_analysis import Reddit_Politics
+from data_processing.data_enrichment import Data_Enrichment
 # from bq_sink.serialize_submission import Protobuf_Serialization
 from bq_sink.bigquery_ingestion import BQ_Sink_Ingestion
 import threading
@@ -11,7 +12,9 @@ if __name__ == '__main__':
     # LiveStream_Submissions().livestream_new_submissions()
     t1 = threading.Thread(target=LiveStream_Submissions().livestream_new_submissions)
     t1.start()
+    # data_consumer()       #call this for console debugging
     df_original = data_consumer()
+    df_processed = Data_Enrichment(df_original).processed_dataframe()
     # Reddit_Politics(df_original).most_upvoted_political_submissions()
     # Protobuf_Serialization().serialize(df_original)
-    BQ_Sink_Ingestion(df_original).bq_stream_write_direct()
+    BQ_Sink_Ingestion(df_processed).bq_stream_write_direct()

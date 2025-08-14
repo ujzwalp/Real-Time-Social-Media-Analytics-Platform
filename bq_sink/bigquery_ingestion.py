@@ -1,7 +1,4 @@
-from spark_session import spark_session
-from pyspark.sql.functions import explode, map_entries
 from dotenv import load_dotenv
-import os
 load_dotenv()
 
 class BigQuery_Ingestion:
@@ -29,8 +26,7 @@ class BQ_Sink_Ingestion(BigQuery_Ingestion):
         """
             media and media_embed columns are mapped(converted) to BQ compatible schema.
         """
-        self.df_flattened = df_flattened.withColumn("media", map_entries("media")) \
-                                    .withColumn("media_embed", map_entries("media_embed"))
+        self.df_flattened = df_flattened
 
     
     def bq_stream_write_direct(self):
@@ -54,7 +50,7 @@ class BQ_Sink_Ingestion(BigQuery_Ingestion):
         batch_df.write\
             .format("bigquery")\
             .option('writeMethod', "direct")\
-            .option("table", "Reddit_Stream.subreddit_submissions_analysis")\
+            .option("table", "Reddit_Stream.subreddit_stream_submission_analysis")\
             .option("parentProject","sturdy-cable-467613-n5")\
             .mode("append")\
             .save()

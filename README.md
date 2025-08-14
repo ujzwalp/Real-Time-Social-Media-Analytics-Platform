@@ -18,7 +18,7 @@ This is for my reference.
 
 7. In another terminal, cd /mnt/d/kafka_2.13-4.0.0
 
-8. Create topic using command: bin/kafka-topics.sh --create --topic social_meida_feed --partitions 4 --bootstrap-server localhost:9092
+8. Create topic using command: bin/kafka-topics.sh --create --topic social_meida_feed --partitions 2 --bootstrap-server localhost:9092
 
 9. cd /mnt/d/'Real-Time Social Media Analytics Platform'
 
