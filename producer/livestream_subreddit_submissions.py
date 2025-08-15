@@ -25,7 +25,7 @@ class LiveStream_Submissions(LiveStream):
         
         print("Script granted access to the api with the following privilege: ",self.reddit.auth.scopes())  
         
-        self.subreddit = self.reddit.subreddit("test")
+        self.subreddit = self.reddit.subreddit("India+PoliticalDiscussion+Nepal")
         
         print("########## Ready to Simulate Livestreaming of the new reddit submissions ##########")
         

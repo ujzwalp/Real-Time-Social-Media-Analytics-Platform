@@ -1,7 +1,6 @@
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType, DoubleType, BooleanType, MapType, ArrayType
 from pyspark.sql.functions import from_json
 from spark_session import spark_session
-import time
 
 spark = spark_session()
 
@@ -159,7 +158,6 @@ class Read_Social_Media_Feed(Message_Reader):
 
         # uncomment below 3 line of code when debuggin is required till spark. comment all stream writing code in main file
         # query = df_submission_flattened.writeStream.outputMode("append").format("console").option("truncate", False).start()
-        # # time.sleep(10)
         # query.awaitTermination()
                 
         return df_submission_flattened

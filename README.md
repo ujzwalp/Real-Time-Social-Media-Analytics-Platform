@@ -21,8 +21,7 @@ This is for my reference.
 8. Create topic using command: bin/kafka-topics.sh --create --topic social_meida_feed --partitions 2 --bootstrap-server localhost:9092
 
 9. cd /mnt/d/'Real-Time Social Media Analytics Platform'
+   note: run this command one-time to generate descriptor file for protobuf: protoc --descriptor_set_out=./protobuf/submission_schema.desc --include_imports --proto_path=./protobuf/ ./protobuf/proto_reddit_post.proto
 
-note: run this command one-time to generate descriptor file for protobuf: protoc --descriptor_set_out=./protobuf/submission_schema.desc --include_imports --proto_path=./protobuf/ ./protobuf/proto_reddit_post.proto
-
-10.Run main script when using protobuf: spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5,org.apache.spark:spark-protobuf_2.12:3.5.5 main.py
-    Run main script when using spark-bq-connector: spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5,com.google.cloud.spark:spark-bigquery-with-dependencies_2.12:0.36.1 main.py
+10. Run main script when using spark-bq-connector: spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5,com.google.cloud.spark:spark-bigquery-with-dependencies_2.12:0.36.1 main.py
+    Note: Run main script when using protobuf: spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5,org.apache.spark:spark-protobuf_2.12:3.5.5 main.py

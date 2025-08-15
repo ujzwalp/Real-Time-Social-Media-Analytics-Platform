@@ -1,4 +1,4 @@
-from producer.producer import Producer_Client_Application
+# from producer.producer import Producer_Client_Application
 from producer.livestream_subreddit_submissions import LiveStream_Submissions
 from data_processing.data_consumer import data_consumer
 # from data_processing.political_analysis import Reddit_Politics
