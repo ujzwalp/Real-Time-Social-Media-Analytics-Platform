@@ -54,4 +54,3 @@ class BQ_Sink_Ingestion(BigQuery_Ingestion):
             .option("parentProject","sturdy-cable-467613-n5")\
             .mode("append")\
             .save()
-            

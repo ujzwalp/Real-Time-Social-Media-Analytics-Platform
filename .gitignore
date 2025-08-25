@@ -28,4 +28,6 @@ tmp
 
 bq_query.sql
 
+start_guide.md
+
 .gitignore
